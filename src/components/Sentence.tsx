@@ -1,6 +1,12 @@
 import { useState } from "react";
+import Button from "./Button";
+import Input from "./Input";
 
-const Sentence = ({ text }: { text: string }) => {
+interface SentenceProps {
+  text: string;
+}
+
+const Sentence = ({ text }: SentenceProps) => {
   const [bold, setBold] = useState<boolean>(false);
   const [italic, setItalic] = useState(false);
   const [underline, setUnderline] = useState(false);
@@ -18,38 +24,13 @@ const Sentence = ({ text }: { text: string }) => {
   return (
     <div className="container">
       <div className="col_1">
-        <button
-          className=""
-          onClick={() => setBold(!bold)}
-        >
-          {bold ? "Unbold" : "Bold"}
-        </button>
-        <button
-          className=""
-          onClick={() => setItalic(!italic)}
-        >
-          {italic ? "Normal" : "Italic"}
-        </button>
-        <button
-          className=""
-          onClick={() => setUnderline(!underline)}
-        >
-          {underline ? "Normal" : "Underline"}
-        </button>
+        <Button onClick={() => setBold(!bold)} text={bold ? "Unbold" : "Bold"} />
+        <Button onClick={() => setItalic(!italic)} text={italic ? "Normal" : "Italic"} />
+        <Button onClick={() => setUnderline(!underline)} text={underline ? "Normal" : "Underline"} />
         <label htmlFor="">Font Size</label>
-        <input
-          type="number"
-          className=""
-          value={fontSize}
-          onChange={(e) => setFontSize(parseInt(e.target.value))}
-        />
+        <Input type="number" value={fontSize.toString()} onChange={(e) => setFontSize(parseInt(e.target.value))} />
         <label htmlFor="">Color</label>
-        <input
-          type="color"
-          className=""
-          value={color}
-          onChange={(e) => setColor(e.target.value)}
-        />
+        <Input type="color" value={color} onChange={(e) => setColor(e.target.value)} />
       </div>
     
       <div className="col_2">
